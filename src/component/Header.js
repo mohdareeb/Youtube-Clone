@@ -1,9 +1,17 @@
+import { useDispatch } from "react-redux"
+import { toggleMenu } from "../utils/appSlice";
+
 const Header=()=>{
+    const dispatch  = useDispatch();
+    
+    const handleSidebar =()=>{ 
+        dispatch(toggleMenu())
+    }
     return (
         
         <div className="flex justify-between p-4 shadow-lg">
             <div className="flex h-6">
-                <img className="mr-2" alt="hamburger" src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2012/10/threelines.png"/>
+                <button onClick={()=>{handleSidebar()}} className="w-10 cursor-pointer"><img className="mr-2" alt="hamburger"  src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2012/10/threelines.png"/></button>
                 <img className="bg-black" alt="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJrpSqrv7Va8wkAJCoRTsHWDJyXJEe_ypDw&s"/>
             </div>
             <div className="h-6">
