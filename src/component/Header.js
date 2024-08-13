@@ -3,6 +3,7 @@ import { toggleMenu } from "../utils/appSlice";
 import { useEffect, useState } from "react";
 import { youtube_suggestion_api } from "../constant/api";
 
+
 const Header=()=>{
     const dispatch  = useDispatch();
     const [searchQuery,setsearchQuery]=useState("");
@@ -12,6 +13,7 @@ const Header=()=>{
         dispatch(toggleMenu())
     }
     
+
 
     useEffect(()=>{
         const timer= setTimeout(()=>
@@ -30,6 +32,11 @@ const Header=()=>{
         const json = await data.json();
         console.log(json[1]);
         setSearchSuggestion(json[1]);
+    }
+
+    const watchSearch=(searchResult)=>{
+    
+        console.log(searchResult);
     }
    
     return (
@@ -54,7 +61,7 @@ const Header=()=>{
                         {
                             searchSuggestion?.map((item , index)=>{
                                 return (
-                                <li key ={index} className="hover:bg-gray-200 rounded-lg">🔍 {item}</li>
+                                <li  key ={index} className="hover:bg-gray-200 rounded-lg"><button onClick={()=>{watchSearch(item)}} >🔍 {item}</button></li>
                                 )
                             })
                         }
