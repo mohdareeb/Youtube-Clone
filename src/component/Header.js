@@ -3,11 +3,18 @@ import { toggleMenu } from "../utils/appSlice";
 import { useEffect, useState } from "react";
 import { youtube_suggestion_api } from "../constant/api";
 
+import { setKeyword } from "../utils/keywordSlice";
+import { Link } from "react-router-dom";
+
+
+
+
 
 const Header=()=>{
     const dispatch  = useDispatch();
     const [searchQuery,setsearchQuery]=useState("");
     const [searchSuggestion,setSearchSuggestion] =useState("");
+    
 
     const handleSidebar =()=>{ 
         dispatch(toggleMenu())
@@ -34,10 +41,12 @@ const Header=()=>{
         setSearchSuggestion(json[1]);
     }
 
-    const watchSearch=(searchResult)=>{
-    
-        console.log(searchResult);
+    const WatchSearch=(searchResult)=>{
+        dispatch(setKeyword(searchResult))
     }
+    
+
+    
    
     return (
         <div>
@@ -61,7 +70,7 @@ const Header=()=>{
                         {
                             searchSuggestion?.map((item , index)=>{
                                 return (
-                                <li  key ={index} className="hover:bg-gray-200 rounded-lg"><button onClick={()=>{watchSearch(item)}} >🔍 {item}</button></li>
+                                <li  key ={index} className="hover:bg-gray-200 rounded-lg"><button onClick={()=>{WatchSearch(item)}} >🔍 {item}</button></li>
                                 )
                             })
                         }
@@ -71,6 +80,7 @@ const Header=()=>{
             :
             null
             }
+
         </div>
     )
 }
