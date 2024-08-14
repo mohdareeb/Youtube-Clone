@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { closedMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import CommentSection from "./CommentSection";
+import LiveChat from "./LiveChat";
 
 const WatchPage =()=>{
     const dispatch = useDispatch();
@@ -11,8 +12,8 @@ const WatchPage =()=>{
 
     return (
         <div>
-            <div className="p-3">
-                <iframe width="1000" 
+            <div className="p-3 flex">
+                <iframe width="980" 
                 height="400" 
                 src={"https://www.youtube.com/embed/" + searchparams.get("v") } 
                 title="YouTube video player" 
@@ -20,6 +21,7 @@ const WatchPage =()=>{
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
                 gyroscope; picture-in-picture; web-share" 
                 referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                <LiveChat/>
             </div>
             <div className="p-2">
                 <CommentSection/>
